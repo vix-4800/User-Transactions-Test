@@ -7,7 +7,7 @@ require_once __DIR__ . '/test.php';
 require_once __DIR__ . '/Services/UserService.php';
 
 $conn = get_connect();
-
+init_db($conn);
 $users = (new UserService())->getUsers($conn, true);
 
 // Uncomment to see data in db
