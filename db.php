@@ -1,11 +1,13 @@
 <?php
 
-function get_connect() {
-    return new PDO("sqlite:file:database.sqlite");
+function get_connect()
+{
+	return new PDO("sqlite:file:database.sqlite");
 }
 
-function init_db($conn) {
-  $conn->exec("
+function init_db($conn)
+{
+	$conn->exec("
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL
@@ -27,10 +29,10 @@ function init_db($conn) {
         FOREIGN KEY (account_to) REFERENCES user_accounts(id)
     );");
 
-  $conn->exec("DELETE FROM `transactions`");
-  $conn->exec("DELETE FROM `user_accounts`");
-  $conn->exec("DELETE FROM `users`");
-  $conn->exec("
+	$conn->exec("DELETE FROM `transactions`");
+	$conn->exec("DELETE FROM `user_accounts`");
+	$conn->exec("DELETE FROM `users`");
+	$conn->exec("
     INSERT INTO `users` (`id`,`name`)
     VALUES
       (10, 'Alice'),
