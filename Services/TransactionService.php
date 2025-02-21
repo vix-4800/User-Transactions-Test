@@ -22,12 +22,22 @@ class TransactionService
 	public function getUserTransactionsBalances(int $user_id, PDO $conn): array
 	{
 		$accounts = $this->userAccountService->getUserAccounts($user_id, $conn);
+
+		if (empty($accounts)) {
+			return [];
+		}
+
 		$outgoingTransactions = $this->getUserOutgoingTransactions($accounts, $conn);
 		$incomingTransactions = $this->getUserIncomingTransactions($accounts, $conn);
 
 		$groupedTransactions = [];
 		foreach (array_merge($outgoingTransactions, $incomingTransactions) as $transaction) {
-			$groupedTransactions[$transaction->getDate()->format('F')] += $transaction->getAmount();
+			$month = $transaction->getDate()->format('F');
+
+			if (!isset($groupedTransactions[$month])) {
+				$groupedTransactions[$month] = 0;
+			}
+			$groupedTransactions[$month] += $transaction->getAmount();
 		}
 
 		return $groupedTransactions;
