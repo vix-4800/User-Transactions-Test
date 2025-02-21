@@ -1,8 +1,10 @@
 <?php
 
-include_once('db.php');
-include_once('model.php');
-include_once('test.php');
+declare(strict_types=1);
+
+include_once 'db.php';
+include_once 'model.php';
+include_once 'test.php';
 
 $conn = get_connect();
 
@@ -11,7 +13,7 @@ $conn = get_connect();
 
 $month_names = [
 	'01' => 'January',
-	'02' => 'Februarry',
+	'02' => 'February',
 	'03' => 'March'
 ]
 ?>
@@ -22,7 +24,9 @@ $month_names = [
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 	<title>User transactions information</title>
+
 	<link rel="stylesheet" href="style.css">
 </head>
 
@@ -31,14 +35,14 @@ $month_names = [
 	<form action="data.php" method="get">
 		<label for="user">Select user:</label>
 		<select name="user" id="user">
-			<?php
-			$users = get_users($conn);
-			foreach ($users as $id => $name) {
-				echo "<option value=\"$id\">" . $name . "</option>";
-			}
-			?>
+			<?php foreach (get_users($conn) as $id => $name) : ?>
+				<option value="<?= $id ?>">
+					<?= $name ?>
+				</option>
+			<?php endforeach ?>
 		</select>
-		<input id="submit" type="submit" value="Show">
+
+		<button id="submit" type="submit">Show</button>
 	</form>
 
 	<div id="data">

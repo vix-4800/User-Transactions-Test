@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 /**
  * Return list of users.
  */
-function get_users($conn)
+function get_users(PDO $conn): array
 {
 	// TODO: implement
 	return [];
@@ -12,7 +14,7 @@ function get_users($conn)
 /**
  * Return transactions balances of given user.
  */
-function get_user_transactions_balances($user_id, $conn)
+function get_user_transactions_balances(int $user_id, PDO $conn): array
 {
 	// TODO: implement
 	return [];
