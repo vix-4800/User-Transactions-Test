@@ -8,7 +8,7 @@ require_once 'Services/UserService.php';
 
 $conn = get_connect();
 
-$users = (new UserService())->getUsers($conn);
+$users = (new UserService())->getUsers($conn, true);
 
 // Uncomment to see data in db
 // run_db_test($conn);

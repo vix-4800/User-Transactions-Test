@@ -79,4 +79,21 @@ class TransactionService
 
 		return $transactions;
 	}
+
+
+	/**
+	 * Count transactions of given user.
+	 * 
+	 * @return int
+	 */
+	public function countTransactions(int $user_id, PDO $conn): int
+	{
+		$statement = $conn->query(
+			"SELECT COUNT(*) FROM `transactions` 
+				WHERE `account_from` IN (SELECT `id` FROM `user_accounts` WHERE `user_id` = {$user_id}) 
+				OR `account_to` IN (SELECT `id` FROM `user_accounts` WHERE `user_id` = {$user_id})"
+		);
+
+		return (int)$statement->fetchColumn();
+	}
 }
