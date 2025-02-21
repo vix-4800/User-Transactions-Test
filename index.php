@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-require_once 'db.php';
-require_once 'test.php';
-require_once 'Services/UserService.php';
+require_once __DIR__ . '/db.php';
+require_once __DIR__ . '/test.php';
+require_once __DIR__ . '/Services/UserService.php';
 
 $conn = get_connect();
 

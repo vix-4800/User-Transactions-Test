@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . './../Models/User.php';
-require_once 'TransactionService.php';
+require_once __DIR__ . '/TransactionService.php';
+require_once __DIR__ . '/../Models/User.php';
 
 class UserService
 {
