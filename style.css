@@ -3,10 +3,12 @@ body {
 	background-color: #e0f7fa; /* Светло-голубой фон */
 	padding: 20px;
 }
+
 h1 {
 	color: #01579b; /* Темно-голубой цвет текста */
 	text-align: center;
 }
+
 form {
 	max-width: 400px;
 	margin: 0 auto;
@@ -15,18 +17,21 @@ form {
 	border-radius: 8px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 label {
 	display: block;
 	margin-bottom: 10px;
 	font-weight: bold;
 }
+
 select {
 	width: 100%;
 	padding: 8px;
-	margin-bottom: 20px;
+
 	border: 1px solid #ccc;
 	border-radius: 4px;
 }
+
 button[type="submit"] {
 	width: 100%;
 	padding: 10px;
@@ -36,10 +41,13 @@ button[type="submit"] {
 	border-radius: 4px;
 	cursor: pointer;
 	font-size: 16px;
+	margin-top: 20px;
 }
+
 button[type="submit"]:hover {
 	background-color: #0277bd; /* Темнее при наведении */
 }
+
 /* Стили для таблицы */
 table {
 	width: 100%;
@@ -48,19 +56,23 @@ table {
 	background-color: #fff; /* Белый фон для таблицы */
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 th,
 td {
 	padding: 12px;
 	text-align: left;
 	border: 1px solid #0288d1; /* Голубые рамки для ячеек */
 }
+
 th {
 	background-color: #0288d1; /* Голубой фон для заголовков */
 	color: white;
 }
+
 td {
 	background-color: #e1f5fe; /* Светло-голубой фон для ячеек */
 }
+
 tr:nth-child(even) td {
 	background-color: #b3e5fc; /* Чередование цвета для строк */
 }

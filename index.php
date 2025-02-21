@@ -45,7 +45,7 @@ $users = (new UserService())->getUsers($conn);
 		</section>
 
 		<section id="data_section">
-			<h2>Transactions of `User name`</h2>
+			<h2>Transactions of `<span id="user_name">User Name</span>`</h2>
 			<table>
 				<thead>
 					<tr>

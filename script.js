@@ -1,6 +1,7 @@
 const form = document.getElementById("form");
 const data_section = document.getElementById("data_section");
 const table_data = document.getElementById("data");
+const submit_btn = document.getElementById("submit");
 
 form.onsubmit = function (e) {
 	e.preventDefault();
@@ -21,7 +22,21 @@ form.onsubmit = function (e) {
 				cell1.innerHTML = data[i].month;
 				cell2.innerHTML = data[i].amount;
 			}
+
+			submit_btn.style.display = "none";
 		}
 	};
 	xhr.send();
 };
+
+const user_select = document.getElementById("user");
+const user_name_span = document.getElementById("user_name");
+user_select.onchange = function () {
+	user_name_span.innerHTML =
+		user_select.options[user_select.selectedIndex].text;
+
+	data_section.style.display = "none";
+	submit_btn.style.display = "block";
+};
+
+user_select.onchange();
