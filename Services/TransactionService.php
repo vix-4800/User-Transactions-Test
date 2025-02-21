@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 require_once __DIR__ . './../Enums/TransactionType.php';
 require_once __DIR__ . './../Models/Transaction.php';
-require_once 'UserService.php';
+require_once 'UserAccountService.php';
 
 class TransactionService
 {
@@ -13,7 +13,7 @@ class TransactionService
 	 */
 	public function getUserTransactionsBalances(int $user_id, PDO $conn): array
 	{
-		$accounts = (new UserService)->getUserAccounts($user_id, $conn);
+		$accounts = (new UserAccountService)->getUserAccounts($user_id, $conn);
 		$outgoingTransactions = $this->getUserOutgoingTransactions($accounts, $conn);
 		$incomingTransactions = $this->getUserIncomingTransactions($accounts, $conn);
 
