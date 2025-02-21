@@ -34,7 +34,7 @@ $users = (new UserService())->getUsers($conn);
 
 <body>
 	<h1>User transactions information</h1>
-	<form action="data.php" method="get">
+	<form action="data.php" method="GET" id="form">
 		<label for="user">Select user:</label>
 		<select name="user" id="user">
 			<?php foreach ($users as $user) : ?>

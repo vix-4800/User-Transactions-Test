@@ -1,10 +1,16 @@
-const submit_btn = document.getElementById("submit");
+const form = document.getElementById("form");
 const data_table = document.getElementById("data");
 
-submit_btn.onclick = function (e) {
+form.onsubmit = function (e) {
 	e.preventDefault();
-	data_table.style.display = "block";
 
-	// TODO: implement
-	alert("Not implemented");
+	const xhr = new XMLHttpRequest();
+	xhr.open(form.method, form.action + "?user=" + form.elements["user"].value);
+
+	xhr.onload = function () {
+		if (xhr.status === 200) {
+			data_table.style.display = "block";
+		}
+	};
+	xhr.send();
 };
