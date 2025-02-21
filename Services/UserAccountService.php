@@ -11,8 +11,10 @@ class UserAccountService
 	 * 
 	 * @return UserAccount[]
 	 */
-	public function getUserAccounts(int $user_id, PDO $conn): array
+	public function getUserAccounts(int|User $user, PDO $conn): array
 	{
+		$user_id = is_int($user) ? $user : $user->getId();
+
 		$statement = $conn->query("SELECT * FROM `user_accounts` WHERE `user_id` = {$user_id}");
 
 		$accounts = [];

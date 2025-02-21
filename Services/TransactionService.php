@@ -19,8 +19,10 @@ class TransactionService
 	/**
 	 * Return transactions balances of given user.
 	 */
-	public function getUserTransactionsBalances(int $user_id, PDO $conn): array
+	public function getUserTransactionsBalances(int|User $user, PDO $conn): array
 	{
+		$user_id = is_int($user) ? $user : $user->getId();
+
 		$accounts = $this->userAccountService->getUserAccounts($user_id, $conn);
 
 		if (empty($accounts)) {
@@ -99,11 +101,11 @@ class TransactionService
 
 	/**
 	 * Count transactions of given user.
-	 * 
-	 * @return int
 	 */
-	public function countTransactions(int $user_id, PDO $conn): int
+	public function countTransactions(int|User $user, PDO $conn): int
 	{
+		$user_id = is_int($user) ? $user : $user->getId();
+
 		$statement = $conn->query(
 			"SELECT COUNT(*) FROM `transactions` 
 				WHERE `account_from` IN (SELECT `id` FROM `user_accounts` WHERE `user_id` = {$user_id}) 
