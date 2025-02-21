@@ -15,12 +15,14 @@ form.onsubmit = function (e) {
 
 			table_data.innerHTML = "";
 			const data = JSON.parse(xhr.response);
-			for (let i = 0; i < data.length; i++) {
+			for (let key in data) {
 				const row = table_data.insertRow();
+
 				const cell1 = row.insertCell(0);
+				cell1.innerHTML = key;
+
 				const cell2 = row.insertCell(1);
-				cell1.innerHTML = data[i].month;
-				cell2.innerHTML = data[i].amount;
+				cell2.innerHTML = data[key];
 			}
 
 			submit_btn.style.display = "none";

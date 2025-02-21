@@ -26,10 +26,25 @@ class UserService
 
 	/**
 	 * Return transactions balances of given user.
+	 */
+	public function getUserTransactionsBalances(int $user_id, PDO $conn): array
+	{
+		$transactions = $this->getUserTransactions($user_id, $conn);
+
+		$groupedTransactions = [];
+		foreach ($transactions as $transaction) {
+			$groupedTransactions[$transaction->getDate()->format('F')] += $transaction->getAmount();
+		}
+
+		return $groupedTransactions;
+	}
+
+	/**
+	 * Return transactions of given user.
 	 * 
 	 * @return Transaction[]
 	 */
-	public function getUserTransactionsBalances(int $user_id, PDO $conn): array
+	public function getUserTransactions(int $user_id, PDO $conn): array
 	{
 		$statement = $conn->query("SELECT * FROM `transactions` WHERE `account_from` = {$user_id}");
 
@@ -44,15 +59,6 @@ class UserService
 			);
 		}
 
-		return [
-			[
-				'month' => 'January',
-				'amount' => 100
-			],
-			[
-				'month' => 'February',
-				'amount' => 200
-			]
-		];
+		return $transactions;
 	}
 }

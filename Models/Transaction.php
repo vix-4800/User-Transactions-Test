@@ -29,7 +29,7 @@ class Transaction
 		return $this->accountTo;
 	}
 
-	public function getAmount(): int
+	public function getAmount(): int|float
 	{
 		return $this->amount;
 	}
