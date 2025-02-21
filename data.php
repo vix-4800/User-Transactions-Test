@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-include_once('db.php');
-include_once('model.php');
+require_once 'db.php';
+require_once 'Services/UserService.php';
 
 $user_id = isset($_GET['user'])
 	? (int)$_GET['user']
@@ -11,6 +11,6 @@ $user_id = isset($_GET['user'])
 
 if ($user_id) {
 	// Get transactions balances
-	$transactions = get_user_transactions_balances($user_id, $conn);
+	$transactions = (new UserService)->getUserTransactionsBalances($user_id, $conn);
 	// TODO: implement
 }

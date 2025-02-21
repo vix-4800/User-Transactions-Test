@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-include_once 'db.php';
-include_once 'model.php';
-include_once 'test.php';
+require_once 'db.php';
+require_once 'test.php';
+require_once 'Services/UserService.php';
 
 $conn = get_connect();
 
@@ -15,7 +15,9 @@ $month_names = [
 	'01' => 'January',
 	'02' => 'February',
 	'03' => 'March'
-]
+];
+
+$users = (new UserService())->getUsers($conn);
 ?>
 
 <!DOCTYPE html>
@@ -35,9 +37,9 @@ $month_names = [
 	<form action="data.php" method="get">
 		<label for="user">Select user:</label>
 		<select name="user" id="user">
-			<?php foreach (get_users($conn) as $id => $name) : ?>
-				<option value="<?= $id ?>">
-					<?= $name ?>
+			<?php foreach ($users as $user) : ?>
+				<option value="<?= $user->getId() ?>">
+					<?= $user->getName() ?>
 				</option>
 			<?php endforeach ?>
 		</select>
