@@ -5,6 +5,7 @@ declare(strict_types=1);
 require_once __DIR__ . './../Enums/TransactionType.php';
 require_once __DIR__ . './../Models/Transaction.php';
 require_once 'UserAccountService.php';
+require_once __DIR__ . './../Models/UserAccount.php';
 
 class TransactionService
 {
@@ -27,6 +28,8 @@ class TransactionService
 
 	/**
 	 * Return outgoing transactions of given user.
+	 * 
+	 * @param UserAccount[] $accounts
 	 * 
 	 * @return Transaction[]
 	 */
@@ -52,6 +55,8 @@ class TransactionService
 
 	/**
 	 * Return incoming transactions of given user.
+	 * 
+	 * @param UserAccount[] $accounts
 	 * 
 	 * @return Transaction[]
 	 */

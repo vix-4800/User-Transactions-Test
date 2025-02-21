@@ -6,8 +6,11 @@ const submit_btn = document.getElementById("submit");
 form.onsubmit = function (e) {
 	e.preventDefault();
 
+	const url = new URL(form.action);
+	url.searchParams.append("user", form.elements["user"].value);
+
 	const xhr = new XMLHttpRequest();
-	xhr.open(form.method, form.action + "?user=" + form.elements["user"].value);
+	xhr.open(form.method, url);
 
 	xhr.onload = function () {
 		if (xhr.status === 200) {
