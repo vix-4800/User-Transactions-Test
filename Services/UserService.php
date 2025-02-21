@@ -5,6 +5,7 @@ declare(strict_types=1);
 require_once __DIR__ . './../Models/User.php';
 require_once __DIR__ . './../Models/Transaction.php';
 require_once __DIR__ . './../Models/UserAccount.php';
+require_once __DIR__ . './../Enums/TransactionType.php';
 
 class UserService
 {
@@ -35,12 +36,8 @@ class UserService
 		$incomingTransactions = $this->getUserIncomingTransactions($accounts, $conn);
 
 		$groupedTransactions = [];
-
-		foreach ($incomingTransactions as $transaction) {
+		foreach (array_merge($outgoingTransactions, $incomingTransactions) as $transaction) {
 			$groupedTransactions[$transaction->getDate()->format('F')] += $transaction->getAmount();
-		}
-		foreach ($outgoingTransactions as $transaction) {
-			$groupedTransactions[$transaction->getDate()->format('F')] -= $transaction->getAmount();
 		}
 
 		return $groupedTransactions;
@@ -63,7 +60,8 @@ class UserService
 				$row['account_from'],
 				$row['account_to'],
 				$row['amount'],
-				new DateTime($row['trdate'])
+				new DateTime($row['trdate']),
+				TransactionType::OUTGOING
 			);
 		}
 
@@ -87,7 +85,8 @@ class UserService
 				$row['account_from'],
 				$row['account_to'],
 				$row['amount'],
-				new DateTime($row['trdate'])
+				new DateTime($row['trdate']),
+				TransactionType::INCOMING
 			);
 		}
 
