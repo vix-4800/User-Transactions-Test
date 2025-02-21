@@ -8,12 +8,19 @@ class UserService
 {
 	/**
 	 * Return list of users.
+	 * 
 	 * @return User[]
 	 */
 	public function getUsers(PDO $conn): array
 	{
-		// TODO: implement
-		return [];
+		$statement = $conn->query('SELECT * FROM `users`');
+		$users = [];
+
+		while ($row = $statement->fetch()) {
+			$users[] = new User($row['id'], $row['name']);
+		}
+
+		return $users;
 	}
 
 	/**
