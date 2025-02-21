@@ -46,11 +46,11 @@ class UserService
 
 		return [
 			[
-				'month' => '01',
+				'month' => 'January',
 				'amount' => 100
 			],
 			[
-				'month' => '02',
+				'month' => 'February',
 				'amount' => 200
 			]
 		];

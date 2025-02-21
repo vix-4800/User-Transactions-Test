@@ -8,16 +8,10 @@ require_once 'Services/UserService.php';
 
 $conn = get_connect();
 
+$users = (new UserService())->getUsers($conn);
+
 // Uncomment to see data in db
 // run_db_test($conn);
-
-$month_names = [
-	'01' => 'January',
-	'02' => 'February',
-	'03' => 'March'
-];
-
-$users = (new UserService())->getUsers($conn);
 ?>
 
 <!DOCTYPE html>
@@ -33,32 +27,37 @@ $users = (new UserService())->getUsers($conn);
 </head>
 
 <body>
-	<h1>User transactions information</h1>
-	<form action="data.php" method="GET" id="form">
-		<label for="user">Select user:</label>
-		<select name="user" id="user">
-			<?php foreach ($users as $user) : ?>
-				<option value="<?= $user->getId() ?>">
-					<?= $user->getName() ?>
-				</option>
-			<?php endforeach ?>
-		</select>
+	<main>
+		<section id="form_section">
+			<h1>User transactions information</h1>
+			<form action="data.php" method="GET" id="form">
+				<label for="user">Select user:</label>
+				<select name="user" id="user">
+					<?php foreach ($users as $user) : ?>
+						<option value="<?= $user->getId() ?>">
+							<?= $user->getName() ?>
+						</option>
+					<?php endforeach ?>
+				</select>
 
-		<button id="submit" type="submit">Show</button>
-	</form>
+				<button id="submit" type="submit">Show</button>
+			</form>
+		</section>
 
-	<div id="data">
-		<h2>Transactions of `User name`</h2>
-		<table>
-			<tr>
-				<th>Month</th>
-				<th>Amount</th>
-			</tr>
-			<tr>
-				<td>...</td>
-				<td>...</td>
-		</table>
-	</div>
+		<section id="data_section">
+			<h2>Transactions of `User name`</h2>
+			<table>
+				<thead>
+					<tr>
+						<th>Month</th>
+						<th>Amount</th>
+					</tr>
+				</thead>
+				<tbody id="data"></tbody>
+			</table>
+		</section>
+	</main>
+
 	<script src="script.js"></script>
 </body>
 

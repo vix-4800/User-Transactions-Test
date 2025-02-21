@@ -65,6 +65,6 @@ tr:nth-child(even) td {
 	background-color: #b3e5fc; /* Чередование цвета для строк */
 }
 
-#data {
+#data_section {
 	display: none;
 }
