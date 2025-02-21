@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 require_once 'db.php';
-require_once 'Services/UserService.php';
+require_once 'Services/TransactionService.php';
 
 $user_id = isset($_GET['user'])
 	? (int)$_GET['user']
@@ -15,5 +15,5 @@ header('Content-Type: application/json');
 if ($user_id) {
 	$conn = get_connect();
 
-	echo json_encode((new UserService)->getUserTransactionsBalances($user_id, $conn));
+	echo json_encode((new TransactionService)->getUserTransactionsBalances($user_id, $conn));
 }
