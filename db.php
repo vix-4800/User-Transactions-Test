@@ -7,7 +7,7 @@ function get_connect(): PDO
 	return new PDO("sqlite:file:database.sqlite");
 }
 
-function init_db($conn): void
+function init_db(PDO $conn): void
 {
 	$conn->exec("
     CREATE TABLE IF NOT EXISTS users (
