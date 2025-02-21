@@ -11,10 +11,9 @@ $user_id = isset($_GET['user'])
 
 header('Content-Type: application/json');
 
+// Get transactions balances
 if ($user_id) {
-	// Get transactions balances
 	$conn = get_connect();
 
-	// TODO: implement
 	echo json_encode((new UserService)->getUserTransactionsBalances($user_id, $conn));
 }

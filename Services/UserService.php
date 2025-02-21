@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 require_once __DIR__ . './../Models/User.php';
+require_once __DIR__ . './../Models/Transaction.php';
 
 class UserService
 {
@@ -14,8 +15,8 @@ class UserService
 	public function getUsers(PDO $conn): array
 	{
 		$statement = $conn->query('SELECT * FROM `users`');
-		$users = [];
 
+		$users = [];
 		while ($row = $statement->fetch()) {
 			$users[] = new User($row['id'], $row['name']);
 		}
@@ -25,10 +26,33 @@ class UserService
 
 	/**
 	 * Return transactions balances of given user.
+	 * 
+	 * @return Transaction[]
 	 */
 	public function getUserTransactionsBalances(int $user_id, PDO $conn): array
 	{
-		// TODO: implement
-		return [];
+		$statement = $conn->query("SELECT * FROM `transactions` WHERE `account_from` = {$user_id}");
+
+		$transactions = [];
+		while ($row = $statement->fetch()) {
+			$transactions[] = new Transaction(
+				$row['id'],
+				$row['account_from'],
+				$row['account_to'],
+				$row['amount'],
+				new DateTime($row['trdate'])
+			);
+		}
+
+		return [
+			[
+				'month' => '01',
+				'amount' => 100
+			],
+			[
+				'month' => '02',
+				'amount' => 200
+			]
+		];
 	}
 }

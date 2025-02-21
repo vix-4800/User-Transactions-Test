@@ -51,7 +51,7 @@ $users = (new UserService())->getUsers($conn);
 		<h2>Transactions of `User name`</h2>
 		<table>
 			<tr>
-				<th>Mounth</th>
+				<th>Month</th>
 				<th>Amount</th>
 			</tr>
 			<tr>
