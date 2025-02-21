@@ -9,12 +9,19 @@ require_once __DIR__ . './../Models/UserAccount.php';
 
 class TransactionService
 {
+	private readonly UserAccountService $userAccountService;
+
+	public function __construct()
+	{
+		$this->userAccountService = new UserAccountService();
+	}
+
 	/**
 	 * Return transactions balances of given user.
 	 */
 	public function getUserTransactionsBalances(int $user_id, PDO $conn): array
 	{
-		$accounts = (new UserAccountService)->getUserAccounts($user_id, $conn);
+		$accounts = $this->userAccountService->getUserAccounts($user_id, $conn);
 		$outgoingTransactions = $this->getUserOutgoingTransactions($accounts, $conn);
 		$incomingTransactions = $this->getUserIncomingTransactions($accounts, $conn);
 
@@ -79,7 +86,6 @@ class TransactionService
 
 		return $transactions;
 	}
-
 
 	/**
 	 * Count transactions of given user.
